@@ -3,11 +3,14 @@
 #include "TankAIController.h"
 
 
+
+
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
 	auto controlledTank = GetControlledTank();
+	
 
 	if (!controlledTank)
 	{
@@ -17,9 +20,25 @@ void ATankAIController::BeginPlay()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("%s is being controled by AI"), *(controlledTank->GetName()));
 	}
+
+	auto playerTank = GetPlayerTank();
+
+	if (!playerTank)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Player tank could not be found"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Aiming at %s"), *(playerTank->GetName()));
+	}
 }
 
 ATank* ATankAIController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
+}
+
+ATank* ATankAIController::GetPlayerTank() const
+{
+	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 }

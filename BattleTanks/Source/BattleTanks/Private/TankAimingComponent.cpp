@@ -90,11 +90,15 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirecion)
 
 	FRotator DeltaRotator = AimAsRotator - BarrelRotator;	
 
-	Barrel->Elevate(DeltaRotator.Pitch);	
-	Turret->RotateAround(DeltaRotator.Yaw);
-	// Move the barrel the right amount this frame
-
-	// Given a max elevation speed, and the frame time
+	Barrel->Elevate(DeltaRotator.Pitch);
+	if (FMath::Abs(DeltaRotator.Yaw) < 180)
+	{
+		Turret->RotateAround(DeltaRotator.Yaw);
+	}
+	else
+	{
+		Turret->RotateAround(-DeltaRotator.Yaw);
+	}
 }
 
 bool UTankAimingComponent::IsBarrelMoving()

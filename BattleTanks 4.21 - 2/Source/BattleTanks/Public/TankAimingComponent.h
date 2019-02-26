@@ -11,7 +11,7 @@
 
 // Enum for Aiming state
 UENUM()
-enum class EFiringStatus : uint8
+enum class EFiringStatus : uint32
 {
 	Locked,
 	Aiming,
@@ -46,7 +46,7 @@ public:
 	EFiringStatus GetFiringState() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
-	int GetRoundsLeft() const;
+	int32 GetRoundsLeft() const;
 	
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
@@ -75,5 +75,6 @@ private:
 
 	bool IsBarrelMoving();
 
-	int RoundsLeft = 3;
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int32 RoundsLeft = 3;
 };

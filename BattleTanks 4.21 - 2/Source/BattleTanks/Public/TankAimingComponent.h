@@ -11,7 +11,7 @@
 
 // Enum for Aiming state
 UENUM()
-enum class EFiringStatus : uint32
+enum class EFiringStatus : uint8
 {
 	Locked,
 	Aiming,

@@ -5,6 +5,7 @@
 //#include "Tank.h"
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "Tank.h"
 #include "TankAIController.generated.h"
 
 class UTankAimingComponent;
@@ -23,6 +24,11 @@ protected:
 private:
 	void BeginPlay() override;
 	void Tick(float DeltaTime) override;
+
+	void SetPawn(APawn* InPawn) override;
+
+	UFUNCTION()
+	void OnTankDeath();
 
 
 };
